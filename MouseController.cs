@@ -49,7 +49,7 @@ public class MouseController : MonoBehaviour {
         lastFramePosition.z = 0;
     }
 
-    public IEnumerator UpdateDragging()
+    public void UpdateDragging()
     {
         // If we're over a UI element, then bail out from this.
         //if (EventSystem.current.IsPointerOverGameObject())
@@ -128,7 +128,7 @@ public class MouseController : MonoBehaviour {
                          Vector3 newTarget = new Vector3(start_x, start_y, 0);
                          GameObject vehicle = GameObject.Find("Excavator").gameObject;
                          StartCoroutine (moveToTarget(newTarget));
-                         yield return new WaitUntil(() => vehicle.transform.position == newTarget);
+                         
                          t.Type = buildModeTile;
                          
                         }
@@ -211,7 +211,8 @@ public class MouseController : MonoBehaviour {
         bool isMoving = vehicle.GetComponent<testMovement>().isMoving;
 
         Debug.Log(isMoving);
-        return null;
+        yield return new WaitUntil(() => vehicle.transform.position == newTarget);
+        
 
         
             

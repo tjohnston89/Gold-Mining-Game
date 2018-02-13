@@ -127,9 +127,9 @@ public class MouseController : MonoBehaviour {
                         {
                          Vector3 newTarget = new Vector3(start_x, start_y, 0);
                          GameObject vehicle = GameObject.Find("Excavator").gameObject;
-                         StartCoroutine (moveToTarget(newTarget));
+                         StartCoroutine (moveToTarget(newTarget, t));
                          
-                         t.Type = buildModeTile;
+                         
                          
                         }
                         
@@ -199,7 +199,7 @@ public class MouseController : MonoBehaviour {
     }
 
      
-     public IEnumerator moveToTarget(Vector3 newTarget)
+     public IEnumerator moveToTarget(Vector3 newTarget, Tile t)
      {
         
         
@@ -212,19 +212,11 @@ public class MouseController : MonoBehaviour {
 
         Debug.Log(isMoving);
         yield return new WaitUntil(() => vehicle.transform.position == newTarget);
-        
-
-        
-            
-            
-            
-            
-       
-        
+        StartCoroutine(doWork(t));
 
         
      }
-     public IEnumerator doWork()
+     public IEnumerator doWork(Tile t)
      {
          
                            float work = 20;
@@ -244,7 +236,7 @@ public class MouseController : MonoBehaviour {
                                 {
                                 Debug.Log("Work done");
                                 yield return null;
-                               // t.Type = buildModeTile;
+                                t.Type = buildModeTile;
                                
 
                                 }
